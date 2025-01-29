@@ -1,0 +1,41 @@
+from flask import Flask, request, jsonify
+import openai
+
+app = Flask(__name__)
+
+# OpenAI API Key (Replace 'your_openai_api_key' with your actual API key)
+openai.api_key = "your_openai_api_key"
+
+# Mortgage Chatbot Logic
+def mortgage_chatbot(user_input):
+    user_input = user_input.lower()
+
+    if "pre-qualify" in user_input or "can i get a loan" in user_input:
+        return "To pre-qualify, I need some details. What's your credit score and annual income?"
+
+    elif "credit score" in user_input or "income" in user_input:
+        return "Based on your input, you may qualify for a loan. Would you like to start an application?"
+
+    elif "types of loans" in user_input or "mortgage options" in user_input:
+        return "We offer Fixed-Rate, Adjustable-Rate (ARM), FHA, VA, and Jumbo Loans. Would you like more details on any of these?"
+
+    elif "loan status" in user_input:
+        return "You can track your loan status by logging into your APR Capital Mortgage account."
+
+    elif "1003 application" in user_input or "loan application" in user_input:
+        return "I can guide you through the 1003 Mortgage Application process. Would you like to begin now?"
+
+    elif "upload documents" in user_input:
+        return "You can securely upload documents like W-2s and tax returns through our portal."
+
+    else:
+        return "I'm here to assist with mortgage inquiries. Ask me about loan options, pre-qualification, or application steps."
+
+@app.route("/chat", methods=["POST"])
+def chat():
+    user_input = request.json.get("message")
+    response = mortgage_chatbot(user_input)
+    return jsonify({"response": response})
+
+if __name__ == "__main__":
+    app.run(debug=True, host="0.0.0.0", port=5000)
