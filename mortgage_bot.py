@@ -3,8 +3,14 @@ import random
 import re
 import speech_recognition as sr
 from flask import Flask, request, jsonify
+from flask_cors import CORS
+
 
 app = Flask(__name__)
+CORS(app)  # Allow all origins
+
+
+
 
 # 🎯 AI Mortgage Chatbot - Fully Contextualized, Adaptive & Smart
 conversation_state = {}
