@@ -11,7 +11,7 @@ conversation_state = {}
 
 # 🌍 Voice AI - Speech Processing
 recognizer = sr.Recognizer()
-tts_engine = pyttsx3.init()
+
 
 # 📌 Enhanced AI Response Variations with Real-Time Context Awareness
 response_variations = {
@@ -139,8 +139,7 @@ def voice_chat():
             audio = recognizer.listen(source)
             user_input = recognizer.recognize_google(audio)
             response_text = mortgage_chatbot("voice_user", user_input)
-            tts_engine.say(response_text)
-            tts_engine.runAndWait()
+
             return jsonify({"response": response_text})
         except sr.UnknownValueError:
             return jsonify({"response": "Sorry, I couldn't understand that. Can you repeat?"})
