@@ -1,0 +1,12 @@
+import openai
+
+openai.api_key = "your_actual_openai_api_key"
+
+def test_gpt4():
+    response = openai.ChatCompletion.create(
+        model="gpt-4",
+        messages=[{"role": "user", "content": "Tell me about DSCR loans."}]
+    )
+    print(response['choices'][0]['message']['content'])
+
+test_gpt4()
